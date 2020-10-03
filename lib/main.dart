@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passable_partmer/config/config.dart';
-import 'package:passable_partmer/screens/login.dart';
+import 'package:passable_partmer/screens/Homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,10 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Passable partner',
       theme: ThemeData(
-        primarySwatch: AppColors.primary,
+        primaryColor: AppColors.primary,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
 }

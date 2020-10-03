@@ -33,6 +33,7 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   flutter_svg: ^0.17.4
   url_launcher: ^5.5.0
+  velocity_x: ^0.4.1
   
 dev_dependencies:
   flutter_test:

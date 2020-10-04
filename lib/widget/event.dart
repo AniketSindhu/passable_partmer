@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:passable_partmer/config/config.dart';
 import 'package:passable_partmer/config/size.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ScrollWidEvent extends StatefulWidget {
-  double amountEarned;
-  String eventCode;
+  final double amountEarned;
+  final String eventCode;
   ScrollWidEvent({this.amountEarned,this.eventCode});
   @override
   _ScrollWidEventState createState() => _ScrollWidEventState();
@@ -18,13 +22,37 @@ class _ScrollWidEventState extends State<ScrollWidEvent> {
     return Container(
       width: width*0.8,
       color: Vx.gray800,
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Row(
-          children:<Widget>[
-            
-          ]
-        ),
+      child: FutureBuilder(
+        future: FirebaseFirestore.instance.collection('events').doc(widget.eventCode).get(),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState==ConnectionState.waiting){
+            return Center(child:SpinKitPouringHourglass(color: AppColors.primary));
+          }
+          else
+          return Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Row(
+              children:<Widget>[
+                CachedNetworkImage(
+                  imageUrl: snapshot.data.data()['eventBanner'],
+                  width: width/3.5,
+                  placeholder: (context, url) => SpinKitFoldingCube(color: AppColors.primary,),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:8),
+                    child: Column(
+                      children: <Widget>[
+                        Text(snapshot.data.data()['eventName'],style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w600),)
+                      ],
+                    ),
+                  )
+                ),
+              ]
+            ),
+          );
+        }
       ),
     ).box.color(Vx.gray800).neumorphic(curve: VxCurve.emboss).make();
   }

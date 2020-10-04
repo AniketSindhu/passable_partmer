@@ -123,16 +123,20 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height:20),
                   Expanded(
                     child: StreamBuilder(
-                      stream: null,
+                      stream: FirebaseFirestore.instance.collection('partners').doc(userName).collection('eventsPartnered').snapshots(),
                       builder: (context, snapshot) {
+                        if(snapshot.connectionState==ConnectionState.waiting){
+                          return SpinKitPouringHourglass(color: AppColors.primary);
+                        }
+                        else
                         return ListView.builder(
                           shrinkWrap: true,
-                          itemCount: 4,
+                          itemCount: snapshot.data.documents.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context,index){
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(16, 16, 16, 36),
-                              child: ScrollWidEvent(),
+                              child: ScrollWidEvent(eventCode: snapshot.data.documents[index].data()['eventCode'],amountEarned: snapshot.data.documents[index].data()['amount_earned'],),
                             );
                           },
                         );

@@ -1,3 +1,4 @@
+import 'package:passable_partmer/widget/event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -34,33 +35,42 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
-        child: Container(
-          color: Colors.grey[800],
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Container(),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    image: DecorationImage(
-                        fit: BoxFit.fitHeight,
-                        image: AssetImage('assets/logo.png'))),
+        child: FutureBuilder(
+          future: FirebaseFirestore.instance.collection("partners").doc(userName).get(),
+          builder: (context, snapshot) {
+            if(snapshot.connectionState==ConnectionState.waiting){
+              return Container(color: Colors.grey[800],child: CircularProgressIndicator(),);
+            }
+            else
+            return Container(
+              color: Colors.grey[800],
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  DrawerHeader(
+                    child: Container(),
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        image: DecorationImage(
+                            fit: BoxFit.fitHeight,
+                            image: AssetImage('assets/logo.png'))),
+                  ),
+                  ListTile(
+                    title: Text('${snapshot.data.data()['name']}',style: TextStyle(fontSize: 25,color: Colors.white),),
+                    subtitle: Text('${snapshot.data.data()['pay']}',style: TextStyle(fontSize: 16,color: Colors.tealAccent)),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.exit_to_app,size: 40,color: Colors.red,),
+                    title: Text('Logout',style: TextStyle(fontSize: 16,color: Colors.red)),
+                    onTap: () {
+                      logout();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
+                    },
+                  ),
+                ],
               ),
-              ListTile(
-                title: Text('Aniket Sindhu',style: TextStyle(fontSize: 25,color: Colors.white),),
-                subtitle: Text('8076819963@paytm',style: TextStyle(fontSize: 16,color: Colors.tealAccent)),
-              ),
-              ListTile(
-                leading: Icon(Icons.exit_to_app,size: 40,color: Colors.red,),
-                title: Text('Logout',style: TextStyle(fontSize: 16,color: Colors.red)),
-                onTap: () {
-                  logout();
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
-                },
-              ),
-            ],
-          ),
+            );
+          }
         ),
       ),
       backgroundColor: Vx.gray800,
@@ -110,6 +120,41 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height:30),
                   "Total Earning: ₹ ${NumberFormat.compact().format(snapshot.data.data()['amount_total'])}".text.center.size(18).semiBold.color(Vx.yellow400).make(),
+                  SizedBox(height:20),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal:16.0),
+                      child: Text('Events Partnerd :',style: TextStyle(fontSize: 20,color: Vx.teal200,fontWeight: FontWeight.w500)),
+                    ),
+                  ),
+                  Expanded(
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection('partners').doc(userName).collection('eventsPartnered').snapshots(),
+                      builder: (context, snapshot) {
+                        if(snapshot.connectionState==ConnectionState.waiting){
+                          return SpinKitPouringHourglass(color: AppColors.primary);
+                        }
+                        else{
+                          if(snapshot.data.documents.length==0){
+                            return Center(child: Text("No events partnered",style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),));
+                          }
+                          else
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.documents.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context,index){
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
+                                child: ScrollWidEvent(eventCode: snapshot.data.documents[index].data()['eventCode'],amountEarned: snapshot.data.documents[index].data()['amount_earned'],),
+                              );
+                            },
+                          );
+                        }
+                      }
+                    ),
+                  )
                 ],
               );
             }

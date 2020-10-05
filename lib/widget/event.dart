@@ -5,6 +5,7 @@ import 'package:passable_partmer/config/size.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:intl/intl.dart';
 
 class ScrollWidEvent extends StatefulWidget {
   final double amountEarned;
@@ -44,7 +45,12 @@ class _ScrollWidEventState extends State<ScrollWidEvent> {
                     padding: const EdgeInsets.symmetric(horizontal:8),
                     child: Column(
                       children: <Widget>[
-                        Text(snapshot.data.data()['eventName'],style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w600),)
+                        Text(snapshot.data.data()['eventName'],style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
+                        SizedBox(height:10),
+                        Text(DateFormat('dd MMM yyyy').format(snapshot.data.data()['eventDateTime'].toDate()).toString(),style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600),),
+                        SizedBox(height:5),
+                        Text(DateFormat('hh:mm a').format(snapshot.data.data()['eventDateTime'].toDate()).toString(),style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600),),
+                        Expanded(child: Center(child: Text('₹ ${NumberFormat.compact().format(widget.amountEarned).toString()}',style: TextStyle(color: Vx.green400,fontSize: 30,fontWeight: FontWeight.w800),))),
                       ],
                     ),
                   )

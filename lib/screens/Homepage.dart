@@ -121,6 +121,13 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height:30),
                   "Total Earning: ₹ ${NumberFormat.compact().format(snapshot.data.data()['amount_total'])}".text.center.size(18).semiBold.color(Vx.yellow400).make(),
                   SizedBox(height:20),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal:16.0),
+                      child: Text('Events Partnerd :',style: TextStyle(fontSize: 20,color: Vx.teal200,fontWeight: FontWeight.w500)),
+                    ),
+                  ),
                   Expanded(
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance.collection('partners').doc(userName).collection('eventsPartnered').snapshots(),
@@ -128,18 +135,23 @@ class _HomePageState extends State<HomePage> {
                         if(snapshot.connectionState==ConnectionState.waiting){
                           return SpinKitPouringHourglass(color: AppColors.primary);
                         }
-                        else
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.documents.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context,index){
-                            return Padding(
-                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 36),
-                              child: ScrollWidEvent(eventCode: snapshot.data.documents[index].data()['eventCode'],amountEarned: snapshot.data.documents[index].data()['amount_earned'],),
-                            );
-                          },
-                        );
+                        else{
+                          if(snapshot.data.documents.length==0){
+                            return Center(child: Text("No events partnered",style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),));
+                          }
+                          else
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.documents.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context,index){
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
+                                child: ScrollWidEvent(eventCode: snapshot.data.documents[index].data()['eventCode'],amountEarned: snapshot.data.documents[index].data()['amount_earned'],),
+                              );
+                            },
+                          );
+                        }
                       }
                     ),
                   )

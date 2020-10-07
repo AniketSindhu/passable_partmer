@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                         "Amount to be paid".text.center.size(18).semiBold.color(Vx.green400).make(),
                       ],
                     )
-                     .box.gray800.roundedFull.alignCenter.width(280).height(280).neumorphic(curve: VxCurve.convex,elevation: 20).make(),
+                     .box.gray800.roundedFull.alignCenter.width(MediaQuery.of(context).size.height*0.35).height(MediaQuery.of(context).size.height*0.35).neumorphic(curve: VxCurve.convex,elevation: 20).make(),
                   ),
                   SizedBox(height:30),
                   "Total Earning: ₹ ${NumberFormat.compact().format(snapshot.data.data()['amount_total'])}".text.center.size(18).semiBold.color(Vx.yellow400).make(),

@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               return ListView(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 45, 12, 40),
+                    padding: const EdgeInsets.fromLTRB(12, 30, 12, 40),
                     child: Row(
                       children: [
                         IconButton(icon: Icon(Icons.menu), onPressed: ()=>_scaffoldKey.currentState.openDrawer(),color: Colors.green[400],iconSize: 30,splashColor: Colors.yellow[400],),
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                         }
                         else
                         return Container(
-                          height: MediaQuery.of(context).size.height*0.3,
+                          height: MediaQuery.of(context).size.height*0.32,
                           child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: snapshot.data.documents.length,

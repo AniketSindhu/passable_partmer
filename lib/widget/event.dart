@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:passable_partmer/config/config.dart';
@@ -45,12 +46,12 @@ class _ScrollWidEventState extends State<ScrollWidEvent> {
                     padding: const EdgeInsets.symmetric(horizontal:8),
                     child: Column(
                       children: <Widget>[
-                        Text(snapshot.data.data()['eventName'],style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
+                        AutoSizeText(snapshot.data.data()['eventName'],maxLines:2,style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
                         SizedBox(height:10),
-                        Text(DateFormat('dd MMM yyyy').format(snapshot.data.data()['eventDateTime'].toDate()).toString(),style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600),),
+                        Text(DateFormat('dd MMM yyyy').format(snapshot.data.data()['eventDateTime'].toDate()).toString(),style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w600),),
                         SizedBox(height:5),
-                        Text(DateFormat('hh:mm a').format(snapshot.data.data()['eventDateTime'].toDate()).toString(),style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600),),
-                        Expanded(child: Center(child: Text('₹ ${NumberFormat.compact().format(widget.amountEarned).toString()}',style: TextStyle(color: Vx.green400,fontSize: 30,fontWeight: FontWeight.w800),))),
+                        Text(DateFormat('hh:mm a').format(snapshot.data.data()['eventDateTime'].toDate()).toString(),style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w600),),
+                        Expanded(child: Center(child: AutoSizeText('₹ ${NumberFormat.compact().format(widget.amountEarned).toString()}',maxLines:1,style: TextStyle(color: Vx.green400,fontSize: 30,fontWeight: FontWeight.w800),))),
                       ],
                     ),
                   )

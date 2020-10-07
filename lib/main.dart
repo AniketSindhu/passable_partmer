@@ -89,7 +89,6 @@ class MyApp1 extends StatelessWidget {
             home: HomePage()
           );
         }
-
         // Otherwise, show something whilst waiting for initialization to complete
         return MaterialApp(
           home: Scaffold(

@@ -94,8 +94,7 @@ class _HomePageState extends State<HomePage> {
                 ));
               }
               else
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+              return ListView(
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(12, 45, 12, 40),
@@ -128,19 +127,20 @@ class _HomePageState extends State<HomePage> {
                       child: Text('Events Partnerd :',style: TextStyle(fontSize: 20,color: Vx.teal200,fontWeight: FontWeight.w500)),
                     ),
                   ),
-                  Expanded(
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance.collection('partners').doc(userName).collection('eventsPartnered').snapshots(),
-                      builder: (context, snapshot) {
-                        if(snapshot.connectionState==ConnectionState.waiting){
-                          return SpinKitPouringHourglass(color: AppColors.primary);
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance.collection('partners').doc(userName).collection('eventsPartnered').snapshots(),
+                    builder: (context, snapshot) {
+                      if(snapshot.connectionState==ConnectionState.waiting){
+                        return SpinKitPouringHourglass(color: AppColors.primary);
+                      }
+                      else{
+                        if(snapshot.data.documents.length==0){
+                          return Center(child: Text("No events partnered",style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),));
                         }
-                        else{
-                          if(snapshot.data.documents.length==0){
-                            return Center(child: Text("No events partnered",style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),));
-                          }
-                          else
-                          return ListView.builder(
+                        else
+                        return Container(
+                          height: MediaQuery.of(context).size.height*0.3,
+                          child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: snapshot.data.documents.length,
                             scrollDirection: Axis.horizontal,
@@ -150,10 +150,10 @@ class _HomePageState extends State<HomePage> {
                                 child: ScrollWidEvent(eventCode: snapshot.data.documents[index].data()['eventCode'],amountEarned: snapshot.data.documents[index].data()['amount_earned'],),
                               );
                             },
-                          );
-                        }
+                          ),
+                        );
                       }
-                    ),
+                    }
                   )
                 ],
               );

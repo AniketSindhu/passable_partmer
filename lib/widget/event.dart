@@ -22,7 +22,6 @@ class _ScrollWidEventState extends State<ScrollWidEvent> {
     double height= SizeConfig.getWidth(context);
     return Container(
       width: width*0.8,
-      height: height*0.25,
       color: Vx.gray800,
       child: FutureBuilder(
         future: FirebaseFirestore.instance.collection('events').doc(widget.eventCode).get(),

@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (context,index){
                               return Padding(
                                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
-                                child: ScrollWidEvent(eventCode: snapshot.data.documents[index].data()['eventCode'],amountEarned: snapshot.data.documents[index].data()['amount_earned'],),
+                                child: ScrollWidEvent(eventCode: snapshot.data.documents[index].data()['eventCode'],amountEarned: snapshot.data.documents[index].data()['amount_earned'],isOnline: snapshot.data.documents[index].data()['isOnline']),
                               );
                             },
                           ),

@@ -11,7 +11,8 @@ import 'package:intl/intl.dart';
 class ScrollWidEvent extends StatefulWidget {
   final double amountEarned;
   final String eventCode;
-  ScrollWidEvent({this.amountEarned,this.eventCode});
+  final bool isOnline;
+  ScrollWidEvent({this.amountEarned,this.eventCode,this.isOnline});
   @override
   _ScrollWidEventState createState() => _ScrollWidEventState();
 }
@@ -25,7 +26,7 @@ class _ScrollWidEventState extends State<ScrollWidEvent> {
       width: width*0.8,
       color: Vx.gray800,
       child: FutureBuilder(
-        future: FirebaseFirestore.instance.collection('events').doc(widget.eventCode).get(),
+        future: FirebaseFirestore.instance.collection(widget.isOnline?'OnlineEvents':'events').doc(widget.eventCode).get(),
         builder: (context, snapshot) {
           if(snapshot.connectionState==ConnectionState.waiting){
             return Center(child:SpinKitPouringHourglass(color: AppColors.primary));

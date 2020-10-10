@@ -15,6 +15,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "228175606025-90m8du0t7ga90ec6hpu5gb22hklgc21s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.passable",
+            "certificate_hash": "99ef07c9f1ff7f3ba0e83ede42bddb2821310901"
+          }
+        },
+        {
+          "client_id": "228175606025-51e1mqhlphmt7iffgctsf1salc5gvqsk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.passable",
+            "certificate_hash": "340cd4326da700f35ace95b739f06e0c1f61261c"
+          }
+        },
+        {
+          "client_id": "228175606025-gbhu2avcagh9g6ejtpvh34tp6lulhfce.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.passable",
+            "certificate_hash": "0af5823b6119b58e0bbee785b1131f65741c8066"
+          }
+        },
+        {
+          "client_id": "228175606025-helmnr2gbor128ibq10e2oe326vp1djb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.passable",
+            "certificate_hash": "59d541ebfd6a22f2e28611e4a95058d518edccb0"
+          }
+        },
+        {
           "client_id": "228175606025-14vq77jemcp6hqkia7hh8kaj7g1tq58q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -52,6 +84,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "228175606025-f2q47nv25f9tv8v2kpqd36rsvcsf0a67.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.passable_host",
+            "certificate_hash": "340cd4326da700f35ace95b739f06e0c1f61261c"
+          }
+        },
+        {
+          "client_id": "228175606025-2e6dm12p9qobl94gc1vscnsibjug8o3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.passable_host",
+            "certificate_hash": "0af5823b6119b58e0bbee785b1131f65741c8066"
+          }
+        },
+        {
+          "client_id": "228175606025-4mnj40gref4bsoa1sdmgt2e0q2qja25g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aniket.passable_host",
+            "certificate_hash": "59d541ebfd6a22f2e28611e4a95058d518edccb0"
+          }
+        },
+        {
           "client_id": "228175606025-0a0v80fep6o14do3vjoocr7o6ku8loq4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -82,17 +138,17 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:228175606025:android:71509b6ac1e092776923d8",
+        "mobilesdk_app_id": "1:228175606025:android:ef5647119005c0736923d8",
         "android_client_info": {
-          "package_name": "com.example.passable_partner"
+          "package_name": "com.aniket.passable_partner"
         }
       },
       "oauth_client": [
         {
-          "client_id": "228175606025-ot379is5gbt97ei24u4rkuflt178v1ek.apps.googleusercontent.com",
+          "client_id": "228175606025-3r8j97ffdmedj0eigd0vd8im5opd81a6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.passable_partner",
+            "package_name": "com.aniket.passable_partner",
             "certificate_hash": "3e757356bc630beb82922b8f55eca683efbdc53c"
           }
         },

@@ -39,3 +39,12 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# Gradle files
+.gradle/
+
+# Local configuration file (sdk path, etc)
+*.properties
+
+*.jks
+
